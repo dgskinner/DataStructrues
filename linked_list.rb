@@ -8,10 +8,10 @@ class Link
   end
   
   def insert_left (link)
-    self.prev = link
-    self.prev = link.prev
+    link.prev = self.prev
     link.next = self
-    self.prev.next = self
+    self.prev.next = link
+    self.prev = link
   end
   
   def insert_right (link)
@@ -32,11 +32,11 @@ class LinkedList
   attr_reader :back_dummy
   
   def initialize (first_link) 
+    @first = first_link   
     @front_dummy = Link.new(nil, @first, nil)
     @back_dummy = Link.new(nil, nil, @first) 
     first_link.prev = @front_dummy
     first_link.next = @back_dummy
-    @first = first_link   
     @length = 1
   end
   
