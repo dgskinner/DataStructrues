@@ -1,5 +1,5 @@
 class Link
-  attr_accessor :next, :prev
+  attr_accessor :value, :next, :prev
   
   def initialize (value, next_link = nil, prev_link = nil)
     @value = value
@@ -7,11 +7,18 @@ class Link
     @prev = prev_link
   end
   
-  def insert (next_link)
-    self.next = next_link
-    self.prev = next_link.prev
-    next_link.prev = self
+  def insert_left (link)
+    self.prev = link
+    self.prev = link.prev
+    link.next = self
     self.prev.next = self
+  end
+  
+  def insert_right (link)
+    link.next = self.next
+    link.prev = self
+    self.next.prev = link
+    self.next = link
   end
   
   def remove
