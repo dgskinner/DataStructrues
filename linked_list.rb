@@ -56,9 +56,8 @@ class LinkedList
   end
   
   def push (link)
-    link.next = @back_dummy
-    link.prev = @back_dummy.prev
-    @back_dummy.prev.next = link
-    @back_dummy.prev = link
+    @back_dummy.insert_left(link)
+    @length += 1
+    link
   end
 end
