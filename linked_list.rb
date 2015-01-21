@@ -31,18 +31,16 @@ end
 class LinkedList
   attr_reader :back_dummy
   
-  def initialize (first_link) 
-    @first = first_link   
+  def initialize 
     @front_dummy = Link.new(nil, @first, nil)
     @back_dummy = Link.new(nil, nil, @first) 
-    first_link.prev = @front_dummy
-    first_link.next = @back_dummy
-    @length = 1
+    @length = 0
   end
   
   def [] (index)
-    link = @first
-    (index).times do
+    return nil if @length == 0
+    link = @front_dummy
+    index.times do
       link = link.next
     end
     
@@ -56,12 +54,11 @@ class LinkedList
     link.next.prev = link
     @length += 1
   end
+  
+  def push (link)
+    link.next = @back_dummy
+    link.prev = @back_dummy.prev
+    @back_dummy.prev.next = link
+    @back_dummy.prev = link
+  end
 end
-
-l0 = Link.new(0)
-l1 = Link.new(1)
-l2 = Link.new(4)
-l3 = Link.new(9)
-l4 = Link.new(16)
-
-list = LinkedList.new(l0)
